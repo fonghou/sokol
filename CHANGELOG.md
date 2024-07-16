@@ -1,5 +1,24 @@
 ## Updates
 
+### 04-Jul-2024
+
+The public sokol_audio.h functions now have an assert to make sure that saudio_setup()
+has already been called.
+
+### 19-Jun-2024
+
+Bugfix in the sokol_gfx.h D3D11 backend: calling `sg_update_image()` with a 3D texture
+didn't take the 'depth pitch' into account which then caused invalid texture content
+in small-ish textures. This happened at a specific size cutoff which seems to be GPU
+specific (on my laptop with integrated Intel GPU only for textures smaller than
+32x32xN).
+
+Related ticket: https://github.com/floooh/sokol/issues/1066
+...and PR: https://github.com/floooh/sokol/pull/1065
+
+I also wrote a new sample for investigating the issue and to protect from
+future regressions: https://floooh.github.io/sokol-html5/dyntex3d-sapp.html
+
 ### 01-Jun-2024
 
 sokol_imgui.h is now officially supported in the [sokol-zig bindings](https://github.com/floooh/sokol-zig).
